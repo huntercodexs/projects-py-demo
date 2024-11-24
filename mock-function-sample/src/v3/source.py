@@ -87,7 +87,7 @@ class DataSource:
     @staticmethod
     def response_ok():
         return {
-            "statusCode": "201",
+            "statusCode": "200",
             "body": {
                 "userId": "12345",
                 "businessId": "67890",
@@ -96,7 +96,7 @@ class DataSource:
         }
 
     @staticmethod
-    def response_body_ok():
+    def response_body_ok_12070020():
         return {
             'cep': '12070-020',
             'logradouro': 'Travessa João Dias Cardoso Sobrinho',
@@ -112,14 +112,15 @@ class DataSource:
             'ddd': '12',
             'siafi': '7183'}
 
+
     @staticmethod
     def response_headers_ok():
         return {
             "statusCode":200,
             "body": {
-                "statusCode":"201",
+                "statusCode":"200",
                 "body":{
-                    "userId":"12345",
+                    "userId":"1234599999",
                     "businessId":"67890",
                     "username":"teste.testesSF4@mailinator.com"
                 }

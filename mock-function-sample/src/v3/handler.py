@@ -30,6 +30,7 @@ class RequestHandlerAPI:
 
 
     def check_http_method(self):
+        print("\nCALL >>> check_http_method")
         if not self.__method or self.__method not in ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD']:
             return {
                 'statusCode': 405,
@@ -38,6 +39,7 @@ class RequestHandlerAPI:
 
 
     def encode_body(self, event):
+        print("CALL >>> encode_body")
         encoded_body = None
 
         if self.__method in ['POST', 'PUT', 'PATCH']:
@@ -55,11 +57,18 @@ class RequestHandlerAPI:
 
 
     def do_request(self, event, encoded_body):
+        print("CALL >>> do_request")
         try:
             headers = event.get('headers', {})
             headers = {k: v for k, v in headers.items()}
 
-            return requests.request(method=self.__method, url=self.build_uri(event), headers=headers, data=encoded_body)
+            response = requests.request(method=self.__method, url=self.build_uri(event), headers=headers, data=encoded_body)
+
+            print("===[response]> ")
+            print(response)
+            print(response.json())
+
+            return response
 
         except requests.exceptions.RequestException as e:
             err = [{'code': '500', 'message': f'Request failed: {str(e)}'}]
@@ -68,6 +77,7 @@ class RequestHandlerAPI:
 
     @staticmethod
     def check_response(response):
+        print("CALL >>> check_response")
         response_body = None
         if response.content:
             response_body = response.json()
@@ -79,6 +89,7 @@ class RequestHandlerAPI:
 
     @staticmethod
     def build_response(response, response_body):
+        print("CALL >>> build_response")
         return {
             'statusCode': response.status_code,
             'body': response_body,

@@ -40,7 +40,7 @@ class RequestHandlerAPITest(TestCase):
         response_body = instance.check_response(response)
         result = instance.build_response(response, response_body)
         self.assertEqual(200, result.get('statusCode'))
-        self.assertEqual(DataSource.response_body_ok(), result.get('body'))
+        self.assertEqual(DataSource.response_body_ok_12070020(), result.get('body'))
 
     def test_lambda_handler_do_request__FAIL_500__(self):
         instance = self.__setup('GET')
